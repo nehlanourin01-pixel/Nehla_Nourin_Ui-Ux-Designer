@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Nehla Nourin</title>
+    <meta name="description" content="Portfolio projects and case studies by Nehla Nourin.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #0B0715;
+            --bg-secondary: #151022;
+            --accent: #8B5CF6;
+            --accent-light: #C4B5FD;
+            --text-white: #FFFFFF;
+            --text-muted: #A1A1AA;
+            --border: rgba(139, 92, 246, 0.15);
+            --border-hover: rgba(139, 92, 246, 0.45);
+            --shadow: 0 10px 40px rgba(139, 92, 246, 0.18);
+            --glass: rgba(21, 16, 34, 0.9);
+            --trans: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-white);
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .syne {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Background Glows --- */
+        .glow-blob {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(60px);
+            animation: float 20s infinite alternate;
+        }
+
+        .blob-1 {
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 60%;
+            width: 300px;
+            height: 300px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(50px, 100px) scale(1.1);
+            }
+        }
+
+        /* --- Custom Cursor --- */
+        #cur {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        #cur-r {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid var(--accent);
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-white);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            transition: var(--trans);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* --- Hero --- */
+        .projects-hero {
+            padding: 12rem 5% 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .projects-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .projects-hero h1 span {
+            color: var(--accent);
+        }
+
+        .projects-hero p {
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 3.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- Filters --- */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .fbtn {
+            padding: 0.8rem 2rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--trans);
+        }
+
+        .fbtn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .fbtn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--bg);
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        /* --- Projects Grid --- */
+        .project-grid {
+            padding: 0 5% 8rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: var(--trans);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow);
+        }
+
+        .p-img-wrap {
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            background: #1a1529;
+        }
+
+        .p-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s ease;
+        }
+
+        .project-card:hover .p-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .p-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 7, 21, 0.95), transparent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .project-card:hover .p-overlay {
+            opacity: 1;
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--bg);
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-weight: 700;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: 0.4s 0.1s;
+        }
+
+        .project-card:hover .view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .p-info {
+            padding: 2rem;
+        }
+
+        .p-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .p-tag {
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .p-year {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .p-title {
+            font-size: 1.5rem;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .p-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* --- Modals --- */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 2, 10, 0.98);
+            z-index: 2000;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.5s;
+            padding: 0;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-white);
+            cursor: pointer;
+            z-index: 2100;
+            transition: var(--trans);
+        }
+
+        .close-modal:hover {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .m-hero {
+            padding: 8rem 5% 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .m-hero-img {
+            width: 100%;
+            height: 500px;
+            border-radius: 32px;
+            margin-top: 3rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .m-hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .m-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 5rem;
+            padding: 5rem 5%;
+        }
+
+        .m-section {
+            margin-bottom: 5rem;
+        }
+
+        .m-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .m-section h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            bottom: 0.5rem;
+            width: 4px;
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .m-section p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .m-sidebar-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .m-sidebar-box h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .m-side-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .m-side-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .m-side-val {
+            font-size: 1rem;
+            color: var(--text-white);
+            font-weight: 500;
+        }
+
+        .m-process-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .process-step {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 20px;
+        }
+
+        .step-num {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            opacity: 0.2;
+            margin-bottom: -1rem;
+        }
+
+        .mockup-sec {
+            padding: 5rem 5%;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .mockup-item {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .m-footer {
+            padding: 5rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 4rem 5% 2rem;
+            background: #08050f;
+            border-top: 1px solid var(--border);
+        }
+
+        .foot-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .foot-socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .soc-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--trans);
+        }
+
+        .soc-icon:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg);
+            transform: translateY(-5px);
+        }
+
+        /* --- Reveal --- */
+        .rv {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease;
+        }
+
+        .rv.on {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .m-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mockup-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+    <div class="glow-blob blob-3"></div>
+
+    <div id="cur"></div>
+    <div id="cur-r"></div>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="logo">Nehla<span>.</span></a>
+        <div class="nav-links">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="projects-hero">
+        <div class="hero-glow"></div>
+        <div class="rv on">
+            <h1 class="syne">Projects & <span>Case Studies</span></h1>
+            <p>A curated collection of digital experiences, where design meets functionality to create meaningful user
+                journeys.</p>
+        </div>
+
+        <div class="filters rv on" style="transition-delay: 0.2s;">
+            <button class="fbtn active" data-cat="all">All Work</button>
+            <button class="fbtn" data-cat="uiux">UI/UX Design</button>
+            <button class="fbtn" data-cat="dev">Development</button>
+        </div>
+    </header>
+
+    <!-- Grid -->
+    <main class="project-grid">
+        <!-- Project 1: FitNest -->
+        <div class="project-card rv on" data-cat="uiux" onclick="openModal('fitnest')">
+            <div class="p-img-wrap" style="background: linear-gradient(135deg, #8B5CF6, #C4B5FD);">
+                <img src="./images/fitnest.png" alt="FitNest">
+                <div class="p-overlay">
+                    <button class="view-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="p-info">
+                <div class="p-meta">
+                    <span class="p-tag">UI/UX · Mobile · Figma</span>
+                    <span class="p-year">2024</span>
+                </div>
+                <h3 class="p-title">FitNest – Fitness Mobile App</h3>
+                <p class="p-desc">Designed a mobile application focused on home workouts and healthy routines with
+                    simple navigation.</p>
+            </div>
+        </div>
+
+        <!-- Project 2: BrightFuture -->
+        <div class="project-card rv on" data-cat="uiux" onclick="openModal('brightfuture')"
+            style="transition-delay: 0.1s;">
+            <div class="p-img-wrap" style="background: linear-gradient(135deg, #38BDF8, #8B5CF6);">
+                <img src="./images/bright future 2.png" alt="BrightFuture">
+                <div class="p-overlay">
+                    <button class="view-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="p-info">
+                <div class="p-meta">
+                    <span class="p-tag">UI/UX · Web · Figma</span>
+                    <span class="p-year">2024</span>
+                </div>
+                <h3 class="p-title">BrightFuture – Education Site</h3>
+                <p class="p-desc">Modern education platform helping students explore courses and apply with an intuitive
+                    dashboard.</p>
+            </div>
+        </div>
+
+        <!-- Project 3: Peppino Pizza -->
+        <div class="project-card rv on" data-cat="uiux" onclick="openModal('peppino')" style="transition-delay: 0.2s;">
+            <div class="p-img-wrap" style="background: linear-gradient(135deg, #f97316, #dc2626);">
+                <img src="./images/pepino.png" alt="Peppino Pizza">
+                <div class="p-overlay">
+                    <button class="view-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="p-info">
+                <div class="p-meta">
+                    <span class="p-tag">UI/UX · Food App · Figma</span>
+                    <span class="p-year">2024</span>
+                </div>
+                <h3 class="p-title">Peppino Pizza – Delivery App</h3>
+                <p class="p-desc">User-friendly food ordering experience with a focus on quick checkout and
+                    mouth-watering visuals.</p>
+            </div>
+        </div>
+
+        <!-- Project 4: Re-Store -->
+        <div class="project-card rv on" data-cat="uiux" onclick="openModal('restore')" style="transition-delay: 0.3s;">
+            <div class="p-img-wrap" style="background: linear-gradient(135deg, #16a34a, #8B5CF6);">
+                <img src="./images/restore.png" alt="Re-Store">
+                <div class="p-overlay">
+                    <button class="view-btn">View Case Study <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="p-info">
+                <div class="p-meta">
+                    <span class="p-tag">UI/UX · Web App · Eco</span>
+                    <span class="p-year">2025</span>
+                </div>
+                <h3 class="p-title">Re-Store – Sustainability App</h3>
+                <p class="p-desc">Eco-tech interface that helps users repair and upcycle items with community-driven
+                    instructions.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="foot-top">
+            <h2 class="logo">Nehla<span>.</span></h2>
+            <div class="foot-socials">
+                <a href="https://www.linkedin.com/in/nehla-nourin-430a36295/" class="soc-icon"><i
+                        class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://wa.me/+919645883490" class="soc-icon"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/nehla_nourin_/" class="soc-icon"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://github.com/NehlaNourin" class="soc-icon"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem;">© 2025 Nehla Nourin. All Rights
+            Reserved.</p>
+    </footer>
+
+    <!-- CASE STUDY MODAL TEMPLATE -->
+    <div id="modal-container" class="modal">
+        <div class="close-modal" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="modal-inner" id="modal-content">
+            <!-- Content injected via JS -->
+        </div>
+    </div>
+
+    <script>
+        // --- Cursor ---
+        const cur = document.getElementById('cur');
+        const curR = document.getElementById('cur-r');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', e => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            cur.style.left = mouseX + 'px'; cur.style.top = mouseY + 'px';
+        });
+
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            curR.style.left = ringX + 'px'; curR.style.top = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // --- Modals Logic ---
+        const projects = {
+            fitnest: {
+                title: "FitNest – Fitness Mobile Application",
+                tag: "UI/UX · Mobile App · Figma",
+                year: "2025",
+                overview: "Designed a mobile application focused on home workouts and healthy routines. The project aimed to simplify the fitness journey for beginners by providing structured workout programs and intuitive progress tracking.",
+                problem: "Many fitness apps are overwhelming for beginners, with cluttered interfaces and complex navigation that discourages regular use.",
+                research: "User interviews revealed that people wanted clear, bite-sized workout instructions and a visual way to see their daily progress without deep diving into menus.",
+                process: ["User Research & Personas", "Information Architecture", "Low-Fidelity Wireframes", "High-Fidelity UI Design", "Interactive Prototyping"],
+                screens: ["Splash & Onboarding", "Daily Workout Plan", "Exercise Detail View", "Progress Dashboard"],
+                palette: ["#8B5CF6", "#C4B5FD", "#FFFFFF", "#0B0715"],
+                image: "./images/image 1.png"
+            },
+            brightfuture: {
+                title: "BrightFuture – Education Website",
+                tag: "UI/UX · Education · Web Design",
+                year: "2025",
+                overview: "Designed a modern education website to help students explore courses and apply easily. The platform balances deep information with a clean, accessible layout.",
+                problem: "Traditional education portals are often outdated and hard to navigate, leading to drop-offs during the application process.",
+                research: "We found that students prioritize course discovery and clear admission timelines. The design needed to feel 'trustworthy' yet 'futuristic'.",
+                process: ["Stakeholder Interviews", "Site Mapping", "Responsive Wireframing", "UI System Creation", "Accessibility Audit"],
+                screens: ["Hero & Course Search", "Course Catalog", "Application Portal", "Student Dashboard"],
+                palette: ["#38BDF8", "#8B5CF6", "#FFFFFF", "#0B0715"],
+                image: "./images/birgt lap screen.png"
+            },
+            peppino: {
+                title: "Peppino Pizza – Food Delivery App",
+                tag: "UI/UX · Food App · Mobile App",
+                year: "2024",
+                overview: "A smooth food ordering experience designed to make picking and purchasing pizza a delight. Focused on high-quality imagery and a frictionless checkout.",
+                problem: "High abandonment rates during checkout in food apps often stem from confusing cart management and slow payment steps.",
+                research: "Users eat with their eyes. High-fidelity food photography paired with a one-click 're-order' feature was the winning combination.",
+                process: ["Competitive Analysis", "User Flow Mapping", "Visual Design", "Motion Design", "Usability Testing"],
+                screens: ["Menu Exploration", "Customizer View", "Smart Cart", "Order Tracking"],
+                palette: ["#F97316", "#DC2626", "#FFFFFF", "#151022"],
+                image: "./images/peppino phone screen.png"
+            },
+            restore: {
+                title: "Re-Store – Sustainability Web App",
+                tag: "UI/UX · Web App · Sustainability",
+                year: "2025",
+                overview: "A sustainability-focused web application that helps users repair, reuse, and upcycle everyday items through a community-driven database.",
+                problem: "People often throw away repairable items because they don't know where to start or feel intimidated by complex DIY guides.",
+                research: "The app needed to feel 'helpful' and 'approachable'. Gamification through community badges encouraged expert users to contribute guides.",
+                process: ["Problem Definition", "Feature Prioritization", "Dark Mode UI Design", "Community Flow Design", "Prototyping"],
+                screens: ["Item Discovery", "Step-by-Step Guide", "Community Forum", "User Impact Stats"],
+                palette: ["#16A34A", "#8B5CF6", "#FFFFFF", "#0B0715"],
+                image: "./images/briht.png"
+            }
+        };
+
+        function openModal(id) {
+            const data = projects[id];
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <div class="m-hero">
+                    <span class="p-tag">${data.tag}</span>
+                    <h1 class="syne" style="margin: 1rem 0;">${data.title}</h1>
+                    <p>${data.overview}</p>
+                    <div class="m-hero-img">
+                        <img src="${data.image}" alt="${data.title}">
+                    </div>
+                </div>
+
+                <div class="m-grid">
+                    <div class="m-left">
+                        <div class="m-section">
+                            <h3>The Problem</h3>
+                            <p>${data.problem}</p>
+                        </div>
+                        <div class="m-section">
+                            <h3>User Research</h3>
+                            <p>${data.research}</p>
+                        </div>
+                        <div class="m-section">
+                            <h3>The Design Process</h3>
+                            <div class="m-process-grid">
+                                ${data.process.map((step, i) => `
+                                    <div class="process-step">
+                                        <div class="step-num">0${i + 1}</div>
+                                        <h4 style="margin-top:1rem; color:var(--text-white);">${step}</h4>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-right">
+                        <div class="m-sidebar-box">
+                            <h4>Project Info</h4>
+                            <div class="m-side-item">
+                                <span class="m-side-label">Role</span>
+                                <span class="m-side-val">Lead UI/UX Designer</span>
+                            </div>
+                            <div class="m-side-item">
+                                <span class="m-side-label">Timeline</span>
+                                <span class="m-side-val">4 Weeks</span>
+                            </div>
+                            <div class="m-side-item">
+                                <span class="m-side-label">Year</span>
+                                <span class="m-side-val">${data.year}</span>
+                            </div>
+                        </div>
+
+                        <div class="m-sidebar-box">
+                            <h4>Visual Identity</h4>
+                            <div style="display:flex; gap:10px; margin-top:1rem;">
+                                ${data.palette.map(color => `
+                                    <div style="width:30px; height:30px; border-radius:50%; background:${color}; border:1px solid var(--border);"></div>
+                                `).join('')}
+                            </div>
+                            <p style="font-size:0.8rem; margin-top:1rem;">Headings: Syne<br>Body: DM Sans</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mockup-sec">
+                    <h3 class="syne" style="text-align:center; margin-bottom:3rem; font-size:2rem;">UI Showcase</h3>
+                    <div class="mockup-grid">
+                        ${data.screens.map(screen => `
+                            <div class="mockup-item">
+                                <div style="padding:1.5rem; background:var(--bg); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px;">
+                                    <div style="width:10px; height:10px; border-radius:50%; background:#ff5f57;"></div>
+                                    <div style="width:10px; height:10px; border-radius:50%; background:#febc2e;"></div>
+                                    <div style="width:10px; height:10px; border-radius:50%; background:#28c840;"></div>
+                                    <span style="font-size:0.7rem; color:var(--text-muted); margin-left:10px;">${screen}</span>
+                                </div>
+                                <div style="height:400px; background:linear-gradient(135deg, ${data.palette[0]}33, transparent); display:flex; align-items:center; justify-content:center;">
+                                    <span style="font-family:'Syne'; font-weight:800; color:${data.palette[0]}; opacity:0.5; font-size:1.5rem;">${screen} Mockup</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                                <div class="m-section" style="padding: 5rem 5% 0;">
+                    <h3>Key Learnings</h3>
+                    <p>This project pushed my understanding of information architecture and the importance of user feedback loops. Designing for ${data.title} taught me how to balance complex data with visual simplicity.</p>
+                </div>
+
+                <div class="m-section" style="padding: 5rem 5% 2rem;">
+                    <h3 class="syne" style="margin-bottom: 2rem;">Other Projects</h3>
+                    <div style="display: grid; grid-gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                        ${Object.keys(projects).filter(k => k !== id).slice(0, 2).map(k => `
+                            <div class="project-card" style="padding: 1.5rem; background: var(--bg-secondary); border: 1px solid var(--border);" onclick="openModal('${k}')">
+                                <h4 class="syne" style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">${projects[k].title.split(' – ')[0]}</h4>
+                                <span class="p-tag" style="font-size: 0.7rem;">View Project <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="m-footer">
+                    <button class="fbtn active" onclick="closeModal()">Back to All Projects</button>
+                </div>
+            `;
+
+            document.getElementById('modal-container').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on Esc
+        window.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // --- Filters Logic ---
+        document.querySelectorAll('.fbtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.getAttribute('data-cat');
+
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+                        card.style.display = 'block';
+                        setTimeout(() => card.style.opacity = '1', 10);
+                    } else {
+                        card.style.opacity = '0';
+                        setTimeout(() => card.style.display = 'none', 400);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
