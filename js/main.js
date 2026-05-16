@@ -194,7 +194,7 @@ function toggleAccordion(card) {
 
 // --- Contact Form ---
 function toggleForm() {
-    const form = document.getElementById("contactform");
+    const form = document.getElementById('contactform');
 
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
