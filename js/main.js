@@ -194,18 +194,29 @@ function toggleAccordion(card) {
 
 // --- Contact Form ---
 function toggleForm() {
-    const form = document.getElementById();
-    const btn = document.getElementById('sayHelloBtn');
-    if (form.style.display === 'block') {
-        form.style.display = 'none';
-        btn.innerText = 'Say Hello';
-    } else {
-        form.style.display = 'block';
-        btn.innerText = '✕ Close';
-        form.scrollIntoView({ behavior: 'smooth' });
-    }
-}
+    const form = document.getElementById("contactform");
 
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const data = new FormData(form);
+
+        const response = await fetch("https://formspree.io/f/maqvrroy", {
+            method: "POST",
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            alert("Message sent successfully ✨");
+            form.reset();
+        } else {
+            alert("Oops! Something went wrong.");
+        }
+    });
+}
 // function sendForm(e) {
 //     e.preventDefault();
 //     const name = document.getElementById('name').value;
