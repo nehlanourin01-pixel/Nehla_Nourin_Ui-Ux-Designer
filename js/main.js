@@ -194,7 +194,22 @@ function toggleAccordion(card) {
 
 // --- Contact Form ---
 function toggleForm() {
-    const form = document.getElementById('contactform');
+     const form = document.getElementById('contactform');
+    const btn = document.getElementById('sayHelloBtn');
+
+    if (form.style.display === 'block') {
+        form.style.display = 'none';
+        btn.innerText = 'Say Hello';
+    } else {
+        form.style.display = 'block';
+        btn.innerText = '✕ Close';
+        form.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("contactform");
 
     form.addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -216,7 +231,9 @@ function toggleForm() {
             alert("Oops! Something went wrong.");
         }
     });
-}
+
+});
+
 // function sendForm(e) {
 //     e.preventDefault();
 //     const name = document.getElementById('name').value;
